@@ -4,12 +4,14 @@ import ButtonsContainer from './ButtonsContainer'
 
 const CalculatorBody = () => {
   const [input, setInput] = useState('');
-  const [displayValue, setDisplayValue] = useState('');
+  const [displayValue, setDisplayValue] = useState('0');
+  const [previousResult, setPreviousResult] = useState(null);
 
   const handleButtonClick = (value) => {
     if (value === 'RESET') {
       setInput('');
       setDisplayValue('0');
+      setPreviousResult(null);
     } else if (value === 'DEL') {
       setInput((prevInput) => {
         const newInput = prevInput.slice(0, -1);
@@ -20,24 +22,34 @@ const CalculatorBody = () => {
       try {
         const calculatedResult = eval(input.replace('x', '*'));
         setDisplayValue(calculatedResult.toString());
+        setPreviousResult(calculatedResult.toString());
         setInput(''); //clear input
       } catch (error) {
         setDisplayValue('Error');
         setInput('');
+        setPreviousResult(null);
       }
-    } else{
-      setInput((prevInput) => {
-        const newInput = prevInput + value;
-        setDisplayValue(newInput);
-        return newInput;
-      });
+    } else if(['+', '-', '*', '/', 'x'].includes(value)){
+      if (previousResult !== null) {
+        setDisplayValue(previousResult + value);
+        setInput(previousResult + value);
+        setPreviousResult(null);
+      } else {
+        setInput((prevInput) => prevInput + value);
+        setDisplayValue((prevDisplay) => prevDisplay + value);
+      }
+    }
+    
+    else{
+      setInput((prevInput) =>  prevInput + value);
+      setDisplayValue((prevDisplay) => (prevDisplay === '0' ? value : prevDisplay + value));
     }
   };
 
 
   return (
     <div className={'calculator-body'}>
-        <AnswerView input={input} result={displayValue}/>
+        <AnswerView displayValue={displayValue}/>
         <ButtonsContainer handleButtonClick={handleButtonClick}/>
     </div>
 
