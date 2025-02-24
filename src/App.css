@@ -8,17 +8,17 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: #ffffff;
     color: rgb(29, 29, 28);
-    background-color: hsl(268, 84%, 13%);
+    /* background-color: hsl(268, 84%, 13%); */
 }
 .calculator-body{
     margin: 10vh auto;
     width: 300px;
     padding: 15px;
-    background-color: hsl(268, 47%, 21%);
+    background-color: hsl(268, 75%, 6%);
     border-radius: 8px;
 }
 .answer-view{
-    background-color: hsl(281, 89%, 26%);
+    background-color: hsl(281, 88%, 38%);
     padding: 10px;
     margin-bottom: 20px;  
     border-radius: 5px;
@@ -36,7 +36,7 @@ body{
     font-weight: bold;
 }
 .buttons-container{
-    background-color: hsl(281, 89%, 26%);
+    background-color: hsl(281, 88%, 38%);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
