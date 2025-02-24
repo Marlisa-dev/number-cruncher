@@ -15,33 +15,35 @@ body{
     width: 300px;
     padding: 15px;
     background-color: hsl(268, 47%, 21%);
+    border-radius: 8px;
 }
 .answer-view{
-    margin-bottom: 20px;
     background-color: hsl(281, 89%, 26%);
-    border-radius: 5px;
     padding: 10px;
+    margin-bottom: 20px;  
+    border-radius: 5px;
+    text-align: right;
     height: 64px;
-    font-size: 30px;
     font-weight: bold;
     color: yellow;
     padding-top: 15px;
 }
+.input{
+    font-size: 1.5rem;
+}
+.result{
+    font-size: 2rem;
+    font-weight: bold;
+}
 .buttons-container{
     background-color: hsl(281, 89%, 26%);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
     padding: 10px;
 }
-.buttons-container div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-
-}
-.buttons-container button{
-    height: 50px;
-    font-weight: bold;
+button{
+    padding: 5px;
     font-size: 18px;
     border: none;
     border-radius: 5px;
@@ -49,19 +51,14 @@ body{
     color: yellow;
     background-color: hsl(281, 82%, 19%);
 }
-
-.regular-btn{
-    width: 50px;
-}
-.regular-btn:hover{
+button:hover{
     background-color: hsl(281, 68%, 33%);
     color: white;
 }
-
-.large-btn{
-    width: 116px;
+.full-width {
+    grid-column: span 2;
 }
-.large-btn:hover{
+button.full-width:hover{
     background-color: orange;
     color: black;
 }
