@@ -4,30 +4,40 @@ import ButtonsContainer from './ButtonsContainer'
 
 const CalculatorBody = () => {
   const [input, setInput] = useState('');
-  const [result, setResult] = useState('');
+  const [displayValue, setDisplayValue] = useState('');
 
   const handleButtonClick = (value) => {
     if (value === 'RESET') {
       setInput('');
-      setResult('');
+      setDisplayValue('0');
     } else if (value === 'DEL') {
-      setInput((prevInput) => prevInput.slice(0, -1)); //Remove last character
+      setInput((prevInput) => {
+        const newInput = prevInput.slice(0, -1);
+        setDisplayValue(newInput || '0');
+        return newInput;
+      });
     } else if (value === '=') {
       try {
         const calculatedResult = eval(input.replace('x', '*'));
-        setResult(calculatedResult);
+        setDisplayValue(calculatedResult.toString());
+        setInput(''); //clear input
       } catch (error) {
-        setResult('Error');
+        setDisplayValue('Error');
+        setInput('');
       }
     } else{
-      setInput((prevInput) => prevInput + value);
+      setInput((prevInput) => {
+        const newInput = prevInput + value;
+        setDisplayValue(newInput);
+        return newInput;
+      });
     }
   };
 
 
   return (
     <div className={'calculator-body'}>
-        <AnswerView input={input} result={result}/>
+        <AnswerView input={input} result={displayValue}/>
         <ButtonsContainer handleButtonClick={handleButtonClick}/>
     </div>
 
